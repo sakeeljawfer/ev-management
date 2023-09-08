@@ -1,25 +1,44 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Button from '../ui/button'
 import Classes from '../events/events-search.module.css'
 
-function EventsSearch() {
+function EventsSearch(props) {
+    const yearInputRef = useRef()
+    const monthInputRef = useRef()
+
+
+    function submitHandler(event) {
+        event.preventDefault();
+        const selectedyear = yearInputRef.current.value
+        const selectedmonth = monthInputRef.current.value
+
+        props.onSearch(selectedyear, selectedmonth)
+    }
     return (
-        <form className={Classes.form}>
+        <form className={Classes.form} onSubmit={submitHandler}>
             <div className={Classes.controls}>
                 <div className={Classes.control}>
                     <label htmlFor='year'>Year</label>
-                    <select id='year'>
+                    <select id='year' ref={yearInputRef}>
                         <option value='2021'>2021</option>
                         <option value='2022'>2022</option>
                     </select>
                 </div>
                 <div className={Classes.control}>
                     <label htmlFor='month'>Month</label>
-                    <select id='month' >
+                    <select id='month' ref={monthInputRef}>
                         <option value='1'>January</option>
                         <option value='2'>February</option>
                         <option value='3'>March</option>
                         <option value='4'>April</option>
+                        <option value='5'>May</option>
+                        <option value='6'>June</option>
+                        <option value='7'>July</option>
+                        <option value='8'>Augast</option>
+                        <option value='9'>September</option>
+                        <option value='10'>October</option>
+                        <option value='11'>November</option>
+                        <option value='12'>December</option>
                     </select>
                 </div>
             </div>
